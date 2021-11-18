@@ -5,6 +5,9 @@ branding:
   icon: download
   color: gray-dark
 inputs:
+  sira-server-code:
+    description: SIRA CDN Code
+    required: true
   manifest:
     description: Path to manifest.json
     required: false
@@ -13,9 +16,6 @@ inputs:
     description: Where to unpack dependencies
     required: false
     default: ${{github.workspace}}/Refs
-  sira-server-code:
-    description: SIRA CDN Code
-    required: true
 runs:
   using: node12
   main: index.js
