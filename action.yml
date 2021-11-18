@@ -1,0 +1,21 @@
+name: Download SIRA Stripped References
+description: Download and extract dependencies for Beat Saber from the SIRA CDN using manifest.json
+author: ProjectSIRA
+branding:
+  icon: download
+  color: gray-dark
+inputs:
+  manifest:
+    description: Path to manifest.json
+    required: false
+    default: ${{github.workspace}}/manifest.json
+  path:
+    description: Where to unpack dependencies
+    required: false
+    default: ${{github.workspace}}/Refs
+  sira-server-code:
+    description: SIRA CDN Code
+    required: true
+runs:
+  using: node12
+  main: index.js
