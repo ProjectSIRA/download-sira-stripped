@@ -3,7 +3,7 @@ const fetch = require("node-fetch");
 const unzip = require("unzipper");
 const fs = require("fs");
 
-main().then(() => info("Complete!"));
+main().then(() => core.info("Complete!"));
 
 async function main() {
   try {
