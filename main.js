@@ -26,26 +26,31 @@ async function main() {
         "' version '" +
         manifest.version +
         "' game version '" +
-        manifest.gameVersion
+        manifest.gameVersion +
+        "'"
     );
 
-    const response = await fetch(
-      "https://cdn.project-sira.tech/gate?code=" +
-        code +
-        "&id=" +
-        manifest.gameVersion
-    );
+    try {
+      const response = await fetch(
+        "https://cdn.project-sira.tech/gate?code=" +
+          code +
+          "&id=" +
+          manifest.gameVersion
+      );
 
-    if (!response) {
-      if (response.status === 400) {
-        throw new Error("Invalid code.");
-      } else if (response.status === 404) {
-        throw new Error("Could not find game version.");
-      } else {
-        throw new Error(
-          "An unknown error has occured. '" + response.status + "'."
-        );
+      if (!response) {
+        if (response.status === 400) {
+          throw new Error("Invalid code.");
+        } else if (response.status === 404) {
+          throw new Error("Could not find game version.");
+        } else {
+          throw new Error(
+            "An unknown error has occured. '" + response.status + "'."
+          );
+        }
       }
+    } catch (error) {
+      throw new Error("Error getting refs: " + error.name);
     }
 
     await response.body.pipe(unzip.Extract({ path: extractPath }));
