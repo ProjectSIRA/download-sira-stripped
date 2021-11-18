@@ -2,6 +2,8 @@ const core = require("@actions/core");
 const fetch = require("node-fetch");
 const unzip = require("unzipper");
 
+main().then(() => core.info("Complete!"));
+
 async function main() {
   try {
     const code = core.getInput("sira-server-code");
