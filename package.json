@@ -1,0 +1,16 @@
+{
+  "name": "download-sira-stripped",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "SIRA",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.6.0",
+    "node-fetch": "^3.1.0",
+    "unzipper": "^0.10.11"
+  }
+}
