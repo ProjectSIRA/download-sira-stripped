@@ -6,12 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "type": "module",
   "author": "SIRA",
   "license": "MIT",
   "dependencies": {
     "@actions/core": "^1.6.0",
-    "node-fetch": "^3.1.0",
+    "node-fetch": "^2.6.1",
     "unzipper": "^0.10.11"
   }
 }

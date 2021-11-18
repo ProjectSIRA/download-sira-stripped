@@ -1,25 +1,26 @@
-import { info, getInput, warning, setFailed } from "@actions/core";
-import fetch from "node-fetch";
-import { Extract } from "unzipper";
+const core = require("@actions/core");
+const fetch = require("node-fetch");
+const unzip = require("unzipper");
+const fs = require("fs");
 
 main().then(() => info("Complete!"));
 
 async function main() {
   try {
-    const code = getInput("sira-server-code");
-    const manifestPath = getInput("manifest");
-    const extractPath = getInput("path");
+    const code = core.getInput("sira-server-code");
+    const manifestPath = core.getInput("manifest");
+    const extractPath = core.getInput("path");
 
     let manifestStringData = fs.readFileSync(manifestPath, "utf8");
     if (manifestStringData.startsWith("\uFEFF")) {
-      warning(
+      core.warning(
         "BOM character detected at the beginning of the manifest JSON file. Please remove the BOM from the file as it does not conform to the JSON spec (https://datatracker.ietf.org/doc/html/rfc7159#section-8.1) and may cause issues regarding interoperability."
       );
       manifestStringData = manifestStringData.slice(1);
     }
 
     const manifest = JSON.parse(manifestStringData);
-    info(
+    core.info(
       "Retrieved manifest of '" +
         manifest.id +
         "' version '" +
@@ -47,8 +48,8 @@ async function main() {
       }
     }
 
-    await response.body.pipe(Extract({ path: extractPath }));
+    await response.body.pipe(unzip.Extract({ path: extractPath }));
   } catch (error) {
-    setFailed(error.message);
+    core.setFailed(error.message);
   }
 }
