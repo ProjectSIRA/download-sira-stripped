@@ -38,7 +38,7 @@ async function main() {
           manifest.gameVersion
       );
 
-      if (!response) {
+      if (!response.ok) {
         if (response.status === 400) {
           throw new Error("Invalid code.");
         } else if (response.status === 404) {
@@ -49,11 +49,10 @@ async function main() {
           );
         }
       }
+      await response.body.pipe(unzip.Extract({ path: extractPath }));
     } catch (error) {
       throw new Error("Error getting refs: " + error.name);
     }
-
-    await response.body.pipe(unzip.Extract({ path: extractPath }));
   } catch (error) {
     core.setFailed(error.message);
   }
