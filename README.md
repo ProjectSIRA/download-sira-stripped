@@ -13,5 +13,5 @@ Downloads stripped files for CI from the SIRA CDN. Designed for open source Beat
     # (Optional) manifest location
     manifest: ${{github.workspace}}/manifest.json
     # (Optional) extract location
-    path: ${{github.workspace}}/Ref
+    path: ${{github.workspace}}/Refs
 ```
